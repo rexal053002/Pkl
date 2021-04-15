@@ -40,7 +40,7 @@
                                 <td><form action="{{route('rw.destroy',$data->id)}}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <a href="{{route('rw.show',$data->id)}}" class="float-right btn btn-outline-primary">Show</a>
+                                    
                                     <a href="{{route('rw.edit',$data->id)}}" class="float-right btn btn-outline-success">Edit</a>
                                     <button type="submit" class="float-right btn btn-outline-danger" onclick="return confirm('Yakin Hapus?')">Hapus</button>
                                 </form>

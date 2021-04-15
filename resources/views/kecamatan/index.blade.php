@@ -40,7 +40,7 @@
                                 <td><form action="{{route('kecamatan.destroy',$data->id)}}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <a href="{{route('kecamatan.show',$data->id)}}" class="float-right btn btn-outline-primary">Show</a>
+                                    
                                     <a href="{{route('kecamatan.edit',$data->id)}}" class="float-right btn btn-outline-success">Edit</a>
                                     <button type="submit" class="float-right btn btn-outline-danger" onclick="return confirm('Yakin Hapus?')">Delete</button>
                                 </form>

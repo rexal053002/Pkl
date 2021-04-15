@@ -71,8 +71,8 @@ class RwController extends Controller
      */
     public function show($id)
     {
-        $rw = Rw::findOrFail($id);
-        return view('rw.show',compact('rw'));
+        // $rw = Rw::findOrFail($id);
+        // return view('rw.show',compact('rw'));
     }
 
     /**

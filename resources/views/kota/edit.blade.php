@@ -8,15 +8,6 @@
                 <div class="card-header">Edit Kota</div>
 
                 {{-- Validasi --}}
-                @if (count($errors) > 0)
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-                @endif
 
                 <div class="card-body">
                     
@@ -26,6 +17,11 @@
                         <div class="mb-3">
                           <label for="exampleInputEmail1" class="form-label">Kode Kota</label>
                           <input type="text" name="kode_kota" value="{{$kota->kode_kota}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+                          @if($errors->has('kode_kota'))
+                            <span class="text-danger">{{$errors->first('kode_kota')}}</span>
+                        @endif
+
                           <div id="emailHelp" class="form-text" required=""></div>
                         </div>
 
@@ -42,6 +38,11 @@
                         <div class="mb-3">
                           <label for="exampleInputPassword1" class="form-label">Nama kota</label>
                           <input type="text" name="nama_kota" value="{{$kota->nama_kota}}" class="form-control" id="exampleInputPassword1">
+
+                          @if($errors->has('nama_kota'))
+                            <span class="text-danger">{{$errors->first('kode_kota')}}</span>
+                        @endif
+
                         </div>
                         <button type="submit" class="btn btn-primary">Edit Data</button>
                       </form>

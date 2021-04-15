@@ -72,8 +72,8 @@ class KelurahanController extends Controller
      */
     public function show($id)
     {
-        $kelurahan = Kelurahan::findOrFail($id);
-        return view('kelurahan.show',compact('kelurahan'));
+        // $kelurahan = Kelurahan::findOrFail($id);
+        // return view('kelurahan.show',compact('kelurahan'));
     }
 
     /**

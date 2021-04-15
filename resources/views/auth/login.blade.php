@@ -17,12 +17,12 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="#"><b>Kawal</b>Covid</a>
+    <a href="#"><b>Kawal</b>Corona</a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">Sign in to start your session</p>
+      <p class="login-box-msg">Login for Admin</p>
 
       <form action="{{ route ('login')}}" method="post">
         @csrf
@@ -67,13 +67,13 @@
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+            <button type="submit" class="btn btn-primary btn-block">Log-in </button>
           </div>
           <!-- /.col -->
         </div>
       </form>
 
-      <div class="social-auth-links text-center mb-3">
+      {{-- <div class="social-auth-links text-center mb-3">
         <p>- OR -</p>
         <a href="#" class="btn btn-block btn-primary">
           <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
@@ -93,7 +93,7 @@
     </div>
     <!-- /.login-card-body -->
   </div>
-</div>
+</div> --}}
 <!-- /.login-box -->
 
 <!-- jQuery -->

@@ -45,24 +45,29 @@ class KotaController extends Controller
      */
     public function store(Request $request)
     {
-        $kota= new Kota();
-        $messages = [
-            'required' => ': Data Wajib di isi',
-            'unique' => ': Data tidak boleh sama',
-        ];
+        $request->validate([
+            'kode_kota' => 'required|max:4|unique:kotas|min:0|integer',
+            'nama_kota' => 'required|unique:kotas'
 
-        $this->validate($request,
+        ],
         [
-            'kode_kota' => 'required | unique:kotas',
-            'nama_kota' => 'required | unique:kotas|regex:/^[a-z A-Z]+$/u',
-            'id_provinsi' => 'required|numeric',
-        ],$messages);
+            'kode_kota.required' => 'Kode Harap Diisi!',
+            'kode_kota.max' => 'Kode Max 4 Digit',
+            'kode_kota.unique' => 'Kode Sudah Terpakai',
+            'nama_kota.required' => 'Nama Kota Harap Diisi!',
+            'nama_kota.unique' => 'Nama Sudah Terpakai',
+            'kode_kota.min' => 'Kode Min 0 Digit!',
+            'kode_kota.integer' => 'Kode integer!'
 
+        ]);
+
+        $kota= new Kota();
         $kota->kode_kota = $request->kode_kota;
         $kota->nama_kota = $request->nama_kota;
-        $kota->id_provinsi = $request->id_provinsi; 
+        $kota->id_provinsi = $request->id_provinsi;
         $kota->save();
-        return redirect()->route('kota.index');
+        return redirect()->route('kota.index')
+            ->with(['message'=>'Data Berhasil dibuat']);
     }
 
     /**
@@ -73,8 +78,8 @@ class KotaController extends Controller
      */
     public function show($id)
     {
-        $kota = Kota::findOrFail($id);
-        return view('kota.show',compact('kota'));
+        // $kota = Kota::findOrFail($id);
+        // return view('kota.show',compact('kota'));
     }
 
     /**
@@ -99,24 +104,26 @@ class KotaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $kota = Kota::findOrFail($id);
-        $messages = [
-            'required' => ': Data Wajib di isi',
-            'unique' => ': Data tidak boleh sama',
-        ];
+        $request->validate([
+            'kode_kota' => 'required|max:4|min:0|integer',
+            'nama_kota' => 'required'
 
-        $this->validate($request,
+        ],
         [
-            'kode_kota' => 'required | unique:kotas',
-            'nama_kota' => 'required | unique:kotas|regex: /^[a-z A-Z]+$/u',
-            'id_provinsi' => 'required|numeric',
-        ],$messages);
+            'kode_kota.required' => 'Kode Harap Diisi!',
+            'kode_kota.max' => 'Kode Max 4 Digit',
+            'nama_kota.required' => 'Nama Kota Harap Diisi!',
+            'kode_kota.min' => 'Kode Min 0 Digit!',
+            'kode_kota.integer' => 'Kode integer!'
 
+        ]);
+        $kota = Kota::findOrFail($id);
         $kota->kode_kota = $request->kode_kota;
         $kota->nama_kota = $request->nama_kota;
         $kota->id_provinsi = $request->id_provinsi;
         $kota->save();
-        return redirect()->route('kota.index');
+        return redirect()->route('kota.index')
+            ->with(['message'=>'Data Berhasil diedit']);
     }
 
     /**

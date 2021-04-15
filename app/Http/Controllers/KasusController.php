@@ -45,12 +45,37 @@ class KasusController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'positif' => 'required|min:0|integer',
+            'meninggal' => 'required|min:0|integer',
+            'sembuh' => 'required|min:0|integer',
+            'tanggal' => 'required'
+            
+
+        ],
+        [
+            'positif.required' => 'Harap Diisi!',
+            'meninggal.required' => 'Harap Diisi!',
+            'sembuh.required' => 'Harap Diisi!',
+            'tanggal.required' => 'Tanggal Harap Diisi!',
+            'positif.min' => 'min 0!',
+            'meninggal.min' => 'min 0!',
+            'sembuh.min' => 'min 0!',
+            'positif.integer' => 'data integer!',
+            'meninggal.integer' => 'data integer!',
+            'sembuh.integer' => 'data integer!'
+           
+
+        ]);
+
+        
         $kasus= new Kasus();
-        $kasus->id_rw = $request->id_rw;
         $kasus->positif = $request->positif;
-        $kasus->sembuh = $request->sembuh;
         $kasus->meninggal = $request->meninggal;
+        $kasus->sembuh = $request->sembuh;
+        $kasus->negatif = $request->negatif;
         $kasus->tanggal = $request->tanggal;
+        $kasus->id_rw = $request->id_rw;
         $kasus->save();
         return redirect()->route('kasus.index')
             ->with(['message'=>'Data Berhasil dibuat']);
@@ -64,8 +89,8 @@ class KasusController extends Controller
      */
     public function show($id)
     {
-        $kasus = Kasus::findOrFail($id);
-        return view('kasus.show',compact('kasus'));
+        // $kasus = Kasus::findOrFail($id);
+        // return view('kasus.show',compact('kasus'));
     }
 
     /**

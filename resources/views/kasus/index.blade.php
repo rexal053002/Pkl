@@ -29,6 +29,7 @@
                          <th >Nama RW</th>
                          <th class="text-center">Positif</th>
                          <th class="text-center">Sembuh</th>
+                         <th class="text-center">negatif</th>
                          <th class="text-center">Meninggal</th>
                          <th class="text-center">Tanggal</th>
                          <th class="text-center">Action</th>
@@ -50,12 +51,12 @@
                                 <td>{{$data->rw->nama_rw}}</td>
                                 <td class="text-center">{{$data->positif}}</td>
                                 <td class="text-center">{{$data->sembuh}}</td>
+                                <td class="text-center">{{$data->negatif}}</td>
                                 <td class="text-center">{{$data->meninggal}}</td>
                                 <td class="text-center">{{$data->tanggal}}</td>
                                 <td><form action="{{route('kasus.destroy',$data->id)}}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <a href="{{route('kasus.show',$data->id)}}" class=" btn btn-outline-primary">Show</a>
                                     <a href="{{route('kasus.edit',$data->id)}}" class=" btn btn-outline-success">Edit</a>
                                     <button type="submit" class=" btn btn-outline-danger" onclick="return confirm('Yakin Hapus?')">Delete</button>
                                 </form>

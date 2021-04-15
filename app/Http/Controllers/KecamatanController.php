@@ -72,8 +72,8 @@ class KecamatanController extends Controller
      */
     public function show($id)
     {
-        $kecamatan = Kecamatan::findOrFail($id);
-        return view('kecamatan.show',compact('kecamatan'));
+        // $kecamatan = Kecamatan::findOrFail($id);
+        // return view('kecamatan.show',compact('kecamatan'));
     }
 
     /**

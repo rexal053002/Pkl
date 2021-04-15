@@ -44,22 +44,26 @@ class ProvinsiController extends Controller
      */
     public function store(Request $request)
     {
-        $provinsi = new Provinsi;
-        $messages = [
-            'required' => ': Data Wajib di isi',
-            'unique' => ': Data tidak boleh sama',
-        ];
+        $request->validate([
+            'kode_provinsi' => 'required|max:4|unique:provinsis|min:0',
+            'nama_provinsi' => 'required|unique:provinsis'
 
-        $this->validate($request,
+        ],
         [
-            'kode_provinsi' => 'required | unique:provinsis',
-            'nama_provinsi' => 'required | unique:provinsis|regex:/^[a-z A-Z]+$/u',
-        ],$messages);
+            'kode_provinsi.required' => 'Kode Harap Diisi!',
+            'kode_provinsi.max' => 'Kode Max 4 Digit',
+            'kode_provinsi.unique' => 'Kode Sudah Terpakai',
+            'nama_provinsi.required' => 'Nama Provinsi Harap Diisi!',
+            'nama_provinsi.unique' => 'Nama Sudah Terpakai',
+            'kode_provinsi.min' => 'Kode Min 0 Digit!',
 
+        ]);
+        $provinsi = new Provinsi();
         $provinsi->kode_provinsi = $request->kode_provinsi;
         $provinsi->nama_provinsi = $request->nama_provinsi;
         $provinsi->save();
-        return redirect()->route('provinsi.index');
+        return redirect()->route('provinsi.index')
+                        ->with(['message'=>'provinsi Berhasil dibuat']);
     }
 
     /**
@@ -70,8 +74,8 @@ class ProvinsiController extends Controller
      */
     public function show($id)
     {
-        $provinsi = Provinsi::findOrFail($id);
-        return view('provinsi.show',compact('provinsi'));
+        // $provinsi = Provinsi::findOrFail($id);
+        // return view('provinsi.show',compact('provinsi'));
     }
 
     /**
@@ -95,22 +99,24 @@ class ProvinsiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $provinsi = Provinsi::findOrFail($id);
-        $messages = [
-            'required' => ': Data Wajib di isi',
-            'unique' => ': Data tidak boleh sama',
-        ];
+        $request->validate([
+            'kode_provinsi' => 'required|max:4|min:0',
+            'nama_provinsi' => 'required'
 
-        $this->validate($request,
+        ],
         [
-            'kode_provinsi' => 'required | unique:provinsis',
-            'nama_provinsi' => 'required | unique:provinsis|regex:/^[a-z A-Z]+$/u',
-        ],$messages);
+            'kode_provinsi.required' => 'Kode Harap Diisi!',
+            'kode_provinsi.max' => 'Kode Max 4 Digit',
+            'nama_provinsi.required' => 'Nama Provinsi Harap Diisi!',
+            'kode_provinsi.min' => 'Kode Min 0 Digit!',
 
+        ]);
+        $provinsi = Provinsi::findOrFail($id);
         $provinsi->kode_provinsi = $request->kode_provinsi;
         $provinsi->nama_provinsi = $request->nama_provinsi;
         $provinsi->save();
-        return redirect()->route('provinsi.index');
+        return redirect()->route('provinsi.index')
+                        ->with(['message'=>'provinsi Berhasil diedit']);
     }
 
     /**
